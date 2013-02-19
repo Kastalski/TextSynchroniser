@@ -16,9 +16,11 @@ var sendParamsCall = null
 var isEdit = false
 $(document).ready(function() {
     loadTextEditor()
-    runUpdateFromServer()
+    runAutoUpdateFromServer()
+    runAutoUpdateToServer()
+})
 
-
+function runAutoUpdateToServer() {
     $("#textEditor").keyup(function() {
         var $this = $(this)
         $('.resultTextPanel').html($this.val())
@@ -29,11 +31,11 @@ $(document).ready(function() {
                 lastText = $this.val()
                 sendData(lastText)
                 isEdit = false
-                runUpdateFromServer()
+                runAutoUpdateFromServer()
             }
         }, 3000)
     })
-})
+}
 
 function sendData(text) {
     // send data to server
@@ -42,7 +44,7 @@ function sendData(text) {
     console.log("size:" + $('#sizeValue').html())
 }
 
-function runUpdateFromServer() {
+function runAutoUpdateFromServer() {
     if (isEdit) return
     jQuery.ajax({
         type: 'get',
@@ -53,7 +55,7 @@ function runUpdateFromServer() {
 
             serverData.size = getRandomBeetwen(10, 18)
             updateTextEditor(serverData)
-            getParamsCall = setTimeout(runUpdateFromServer, 5000)
+            getParamsCall = setTimeout(runAutoUpdateFromServer , 5000)
         }
     })
 }
