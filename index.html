@@ -2,15 +2,64 @@
 <html>
 <head>
     <title>Task 6</title>
-
     <script type="text/javascript" src="http://code.jquery.com/jquery-1.9.1.js"></script>
     <script type="text/javascript" src="http://code.jquery.com/ui/1.10.1/jquery-ui.js"></script>
     <script type="text/javascript" src="js/textEditor.js"></script>
     <script type="text/javascript" src="js/loadPage.js"></script>
     <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.1/themes/base/jquery-ui.css">
     <style>
+        #textEditorContainer {
+            width: 500px;
+            height: 400px;
+        }
+        .resultTextPanel {
+            min-height: 100px;
+            border: 1px solid #BBB;
+            background-color: #EEE;
+        }
+        .toolPanel {
+            margin: 10px;
+        }
+        #textSizeSlider {
+            float: left;
+            width: 430px;
+        }
+        #sizeValue {
+            float: left;
+            width: 23px;
+            font-size: 14pt;
+            padding-left: 25px;
+        }
+        #fonts {
+            float:left;
+            width: 200px;
+        }
+        #fonts div#currentFont {
+            cursor: pointer;
+            width: 200px;
+            margin: 5px;
+            font-weight: bold;
+            background-color: #EEE;
+            font-size: 14pt;
+        }
+        #fonts ul {
+            position: absolute;
+            width: 200px;
+            padding: 5px;
+            overflow: hidden;
+            margin:0px;
+        }
+        #fonts ul li {
+            position: relative;
+            z-index: 1000;
+            font-size: 13px;
+            background-color: #FFF;
+            padding: 5px;
+            cursor: pointer;
+        }
+
         textarea#textEditor {
-            width: 300px;
+            width: 500px;
             height: 100px;
             resize: none;
             border: 1px solid #AAA;
@@ -18,14 +67,23 @@
     </style>
 </head>
 <body>
-    <div class="container">
-        <div id="textEditorContainer">
-            <div class="toolPanel">
-                <div id="textSizeSlider"></div>
+    <div id="textEditorContainer">
+        <div class="resultTextPanel"></div>
+        <div class="toolPanel">
+            <div id="textSizeSlider"></div>
+            <div id="sizeValue"></div>
+            <div id="fonts">
+                <div id="currentFont"></div>
+                <ul style="display:none;">
+                    <li data="Comic Sans MS">Comic Sans MS</li>
+                    <li data="Courier New">Courier New</li>
+                    <li data="Times New Roman">Times New Roman</li>
+                    <li data="Arial">Arial</li>
+                </ul>
             </div>
-            <div class="textPanel">
-                <textarea id="textEditor">Snowboarding is a winter sport that involves descending a slope that is covered with snow while standing on a board attached to a rider's feet, using a special boot set onto a mounted binding.</textarea>
-            </div>
+        </div>
+        <div class="textInputPanel">
+            <textarea id="textEditor"></textarea>
         </div>
     </div>
 </body>
