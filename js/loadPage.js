@@ -11,55 +11,61 @@ var serverData = {
     'text': "Snowboarding is a winter sport that involves descending a slope that is ..."
 }
 
-var lastText = $('textEditor').val()
-var sendParamsCall = null
-var isEdit = false
+Math.getRandomBeetwen = function(min, max) {
+    return this.round(this.random() * (max - min) + min)
+}
+
 $(document).ready(function() {
+    var textEditor = new TextEditor()
     loadTextEditorComponents()
-    runAutoUpdateFromServer()
-    runAutoUpdateToServer()
+    textEditor.runAutoUpdateFromServer()
+    textEditor.runAutoUpdateToServer()
 })
 
-function runAutoUpdateToServer() {
-    $("#textEditor").keyup(function() {
-        var $this = $(this)
-        $('.resultTextPanel').html($this.val())
-        clearTimeout(sendParamsCall)
-        isEdit = true
-        sendParamsCall = setTimeout(function() {
-            if ($this.val() != lastText) {
-                lastText = $this.val()
-                sendData(lastText)
-                isEdit = false
-                runAutoUpdateFromServer()
+var TextEditor = function() {
+    var textEditor = this
+    var lastText = $('textEditor').val()
+    var sendParamsCall = null
+    var isEdit = false
+
+    this.runAutoUpdateToServer = function() {
+        $("#textEditor").keyup(function() {
+            var $this = $(this)
+            $('.resultTextPanel').html($this.val())
+            clearTimeout(sendParamsCall)
+            isEdit = true
+            sendParamsCall = setTimeout(function() {
+                if ($this.val() != lastText) {
+                    lastText = $this.val()
+                    sendData(lastText)
+                    isEdit = false
+                    textEditor.runAutoUpdateFromServer()
+                }
+            }, 3000)
+        })
+    }
+
+    function sendData(text) {
+        // send data to server
+        console.log("text:" + text)
+        console.log("font:" + $('#currentFont').html())
+        console.log("size:" + $('#sizeValue').html())
+    }
+
+    this.runAutoUpdateFromServer = function() {
+        if (isEdit) return
+        jQuery.ajax({
+            type: 'get',
+            url: 'http://blah.com',
+            dataType: 'json',
+            complete: function() {
+                if (isEdit) return
+
+                serverData.size = Math.getRandomBeetwen(10, 18)
+                updateTextEditor(serverData)
+                getParamsCall = setTimeout(textEditor.runAutoUpdateFromServer , 5000)
             }
-        }, 3000)
-    })
+        })
+    }
 }
 
-function sendData(text) {
-    // send data to server
-    console.log("text:" + text)
-    console.log("font:" + $('#currentFont').html())
-    console.log("size:" + $('#sizeValue').html())
-}
-
-function runAutoUpdateFromServer() {
-    if (isEdit) return
-    jQuery.ajax({
-        type: 'get',
-        url: 'http://blah.com',
-        dataType: 'json',
-        complete: function() {
-            if (isEdit) return
-
-            serverData.size = getRandomBeetwen(10, 18)
-            updateTextEditor(serverData)
-            getParamsCall = setTimeout(runAutoUpdateFromServer , 5000)
-        }
-    })
-}
-
-function getRandomBeetwen(min, max) {
-    return Math.round(Math.random() * (max - min) + min)
-}
