@@ -15,7 +15,7 @@ var lastText = $('textEditor').val()
 var sendParamsCall = null
 var isEdit = false
 $(document).ready(function() {
-    loadTextEditor()
+    loadTextEditorComponents()
     runAutoUpdateFromServer()
     runAutoUpdateToServer()
 })

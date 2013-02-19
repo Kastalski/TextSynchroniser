@@ -5,7 +5,7 @@
  * Time: 17:04
  * To change this template use File | Settings | File Templates.
  */
-function loadTextEditor() {
+function loadTextEditorComponents() {
     loadSizeSlider(8, 20)
     loadFontList()
 }
