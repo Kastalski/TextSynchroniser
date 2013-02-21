@@ -11,7 +11,7 @@ var serverData = {
     'text': "Snowboarding is a winter sport that involves descending a slope that is ..."
 }
 
-requirejs(['TextEditorComClient', 'TextEditorComServer'],
+requirejs(['TextEditorComClient', 'TextEditorComServer', 'jquery'],
     function (TextEditorComClient, TextEditorComServer) {
         $(document).ready(function() {
             var comClient = new TextEditorComClient()

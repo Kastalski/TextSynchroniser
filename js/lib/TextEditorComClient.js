@@ -5,7 +5,7 @@
  * Time: 17:04
  * To change this template use File | Settings | File Templates.
  */
-define(function() {
+define(['jquery', 'jqueryui'], function($) {
     return function() {
         (function() {
             loadSizeSlider(8, 20)

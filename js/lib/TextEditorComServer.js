@@ -5,7 +5,7 @@
  * Time: 17:57
  * To change this template use File | Settings | File Templates.
  */
-define(function() {
+define(['jquery'], function($) {
     return function(comClient) {
         var comServer = this
         var lastText = $('textEditor').val()
@@ -31,7 +31,7 @@ define(function() {
 
         this.runAutoUpdateFromServer = function() {
             if (isEdit) return
-            jQuery.ajax({
+            $.ajax({
                 type: 'get',
                 url: 'http://blah.com',
                 dataType: 'json',
