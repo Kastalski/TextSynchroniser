@@ -5,7 +5,7 @@
  * Time: 17:57
  * To change this template use File | Settings | File Templates.
  */
-define(['jquery'], function($) {
+define(['jquery', 'data/serverData'], function($, serverData) {
     return function(comClient) {
         var comServer = this
         var lastText = $('textEditor').val()

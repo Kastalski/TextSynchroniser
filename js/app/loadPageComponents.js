@@ -5,12 +5,6 @@
  * Time: 18:15
  * To change this template use File | Settings | File Templates.
  */
-var serverData = {
-    'font': "Courier New",
-    'size': "12",
-    'text': "Snowboarding is a winter sport that involves descending a slope that is ..."
-}
-
 requirejs(['TextEditorComClient', 'TextEditorComServer', 'jquery'],
     function (TextEditorComClient, TextEditorComServer) {
         $(document).ready(function() {
